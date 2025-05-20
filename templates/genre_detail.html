@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ genre.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        a.back {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        a.back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Жанр: {{ genre.name }}</h1>
+
+    <h2>Книги:</h2>
+    {% if books %}
+        <ul>
+        {% for book in books %}
+            <li>{{ book.title }} ({{ book.year }})</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>В этом жанре пока нет книг.</p>
+    {% endif %}
+
+    <a href="{{ url_for('genres') }}" class="back">← Назад к списку жанров</a>
+</div>
+
+</body>
+</html>

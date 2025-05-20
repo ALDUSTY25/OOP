@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center fade-in">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-4">
+                <h2 class="text-center mb-4">📝 Регистрация</h2>
+
+                <!-- Форма регистрации -->
+                <form method="POST" class="needs-validation" novalidate>
+                    {{ form.hidden_tag() }}
+
+                    <!-- Имя пользователя -->
+                    <div class="mb-3">
+                        <label for="username" class="form-label visually-hidden">{{ form.username.label }}</label>
+                        {{ form.username(class="form-control form-control-lg rounded-pill", id="username", placeholder=form.username.label.text, required=True) }}
+                        <div class="invalid-feedback">
+                            Введите имя пользователя
+                        </div>
+                    </div>
+
+                    <!-- Пароль -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label visually-hidden">{{ form.password.label }}</label>
+                        {{ form.password(class="form-control form-control-lg rounded-pill", id="password", placeholder=form.password.label.text, required=True) }}
+                        <div class="invalid-feedback">
+                            Введите пароль
+                        </div>
+                    </div>
+
+                    <!-- Администратор -->
+                    <div class="form-check mb-3">
+                        {{ form.is_admin(class="form-check-input", id="is_admin") }}
+                        {{ form.is_admin.label(class="form-check-label") }}
+                    </div>
+
+                    <!-- Кнопка отправки -->
+                    <div class="d-grid">
+                        {{ form.submit(class="btn btn-primary btn-lg rounded-pill shadow-sm") }}
+                    </div>
+                </form>
+
+                <!-- Ссылка на вход -->
+                <p class="text-center mt-3">
+                    <a href="{{ url_for('login') }}" class="text-decoration-none">🔑 Уже есть аккаунт? Войти</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

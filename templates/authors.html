@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center fade-in">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-4">
+                <h2 class="text-center mb-4">✍️ Авторы</h2>
+
+                <!-- Список авторов -->
+                {% if authors %}
+                <ul class="list-group list-group-flush mb-4">
+                    {% for author in authors %}
+                    <li class="list-group-item d-flex align-items-center py-3">
+                        <span class="me-auto">{{ author.name }}</span>
+                        <a href="{{ url_for('edit_author', author_id=author.id) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                            Редактировать
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <div class="alert alert-info text-center rounded-pill py-3" role="alert">
+                    📖 Авторы не найдены.
+                </div>
+                {% endif %}
+
+                <!-- Ссылка назад -->
+                <div class="text-center mt-3">
+                    <a href="{{ url_for('index') }}" class="text-decoration-none">← На главную</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center fade-in">
+    <div class="col-md-10">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-4">
+                <h2 class="text-center mb-4">📚 Список книг</h2>
+
+                <!-- Список книг -->
+                {% if books %}
+                <div class="row g-4">
+                    {% for book in books %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm hover-lift">
+                            <!-- Обложка книги -->
+                            {% if book.cover %}
+                            <img src="{{ url_for('static', filename=book.cover) }}?v={{ book.id }}"
+                                 alt="Обложка {{ book.title }}"
+                                 class="card-img-top img-fluid rounded-top"
+                                 style="max-height: 300px; object-fit: cover;">
+                            {% else %}
+                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center text-muted"
+                                 style="height: 200px; border-bottom: 1px solid #dee2e6;">
+                                Нет обложки
+                            </div>
+                            {% endif %}
+
+                            <!-- Текст книги -->
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title fw-bold">{{ book.title }}</h5>
+                                <p class="card-text text-muted mb-2">📅 {{ book.year }}</p>
+                                <p class="card-text">
+                                    ✍️ Автор:
+                                    {% if book.author %}
+                                    {{ book.author.name }}
+                                    {% else %}
+                                    <span class="text-muted">—</span>
+                                    {% endif %}
+                                </p>
+                                <p class="card-text">
+                                    🎭 Жанр:
+                                    {% if book.genre %}
+                                    {{ book.genre.name }}
+                                    {% else %}
+                                    <span class="text-muted">—</span>
+                                    {% endif %}
+                                </p>
+                                <div class="mt-auto text-end">
+                                    <a href="{{ url_for('edit_book', book_id=book.id) }}"
+                                       class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                        Редактировать
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="alert alert-info text-center rounded-pill py-3" role="alert">
+                    📖 Книги не найдены.
+                </div>
+                {% endif %}
+
+                <!-- Ссылка назад -->
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('index') }}" class="text-decoration-none">← Назад на главную</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

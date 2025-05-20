@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Жанры</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 20px;
+        }
+
+        .genre-list {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .genre-item {
+            background: white;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .genre-name {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align:center;">Жанры</h1>
+
+    <div class="genre-list">
+        {% for genre in genres %}
+        <div class="genre-item">
+            <span class="genre-name">{{ genre.name }}</span>
+            <a href="{{ url_for('genre_detail', genre_id=genre.id) }}" class="btn">Подробнее</a>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

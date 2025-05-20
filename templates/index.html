@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center fade-in">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-4">
+                <h2 class="text-center mb-4">📚 Система управления библиотекой</h2>
+
+                {% if not session.get('user_id') %}
+                <h3 class="text-center text-primary mb-4">Вход</h3>
+                <form action="{{ url_for('login') }}" method="POST" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="username" class="form-label visually-hidden">Пользователь</label>
+                        <input type="text" id="username" name="username" placeholder="Пользователь" class="form-control form-control-lg rounded-pill" required>
+                        <div class="invalid-feedback">
+                            Введите имя пользователя
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label visually-hidden">Пароль</label>
+                        <input type="password" id="password" name="password" placeholder="Пароль" class="form-control form-control-lg rounded-pill" required>
+                        <div class="invalid-feedback">
+                            Введите пароль
+                        </div>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm">🔑 Войти</button>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ url_for('register') }}" class="text-decoration-none">📝 Регистрация</a>
+                    </div>
+                </form>
+                {% else %}
+                <div class="alert alert-success text-center rounded-pill py-3">
+                    ✅ Вы вошли как пользователь с ID: <strong>{{ session['user_id'] }}</strong>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

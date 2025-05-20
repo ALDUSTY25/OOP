@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center fade-in">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-4">
+                <h2 class="text-center mb-4">📚 Редактировать книгу: {{ book.title }}</h2>
+
+                <!-- Форма с поддержкой загрузки файлов -->
+                <form method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+
+                    <!-- Название книги -->
+                    <div class="mb-3">
+                        <label for="title" class="form-label visually-hidden">{{ form.title.label }}</label>
+                        {{ form.title(class="form-control form-control-lg rounded-pill", id="title", placeholder=form.title.label.text, required=True) }}
+                        <div class="invalid-feedback">
+                            Введите название книги
+                        </div>
+                    </div>
+
+                    <!-- Автор -->
+                    <div class="mb-3">
+                        <label for="author_name" class="form-label visually-hidden">{{ form.author_name.label }}</label>
+                        {{ form.author_name(class="form-control form-control-lg rounded-pill", id="author_name", placeholder=form.author_name.label.text, required=True) }}
+                        <div class="invalid-feedback">
+                            Введите имя автора
+                        </div>
+                    </div>
+
+                    <!-- Жанр -->
+                    <div class="mb-3">
+                        <label for="genre_name" class="form-label visually-hidden">{{ form.genre_name.label }}</label>
+                        {{ form.genre_name(class="form-control form-control-lg rounded-pill", id="genre_name", placeholder=form.genre_name.label.text, required=True) }}
+                        <div class="invalid-feedback">
+                            Введите жанр
+                        </div>
+                    </div>
+
+                    <!-- Год издания -->
+                    <div class="mb-3">
+                        <label for="year" class="form-label visually-hidden">{{ form.year.label }}</label>
+                        {{ form.year(class="form-control form-control-lg rounded-pill", id="year", placeholder=form.year.label.text, required=True) }}
+                        <div class="invalid-feedback">
+                            Введите год издания
+                        </div>
+                    </div>
+
+                    <!-- Текущая обложка -->
+                    {% if book.cover %}
+                    <div class="mb-3 text-center">
+                        <img src="{{ url_for('static', filename=book.cover) }}?v={{ book.id }}"
+                             alt="Текущая обложка"
+                             class="img-fluid rounded shadow-sm"
+                             style="max-height: 200px; object-fit: cover;">
+                        <p class="mt-2 text-muted small">Текущая обложка</p>
+                    </div>
+                    {% endif %}
+
+                    <!-- Загрузка новой обложки -->
+                    <div class="mb-3">
+                        <label for="cover" class="form-label visually-hidden">{{ form.cover.label }}</label>
+                        {{ form.cover(class="form-control form-control-lg rounded-pill", id="cover") }}
+                        <div class="form-text text-muted small mt-1">
+                            Допустимые форматы: jpg, jpeg, png. Максимальный размер: 16 МБ.
+                        </div>
+                        <div class="invalid-feedback">
+                            Загрузите обложку в поддерживаемом формате
+                        </div>
+                    </div>
+
+                    <!-- Кнопка сохранения -->
+                    <div class="d-grid">
+                        {{ form.submit(class="btn btn-primary btn-lg rounded-pill shadow-sm", value='Сохранить изменения') }}
+                    </div>
+                </form>
+
+                <!-- Ссылка назад -->
+                <p class="text-center mt-3">
+                    <a href="{{ url_for('books') }}" class="text-decoration-none">← Назад к книгам</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center fade-in">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-5 text-center">
+                <h2 class="mb-4">👋 Добро пожаловать, {{ reader.username }}!</h2>
+
+                <p class="lead mb-4">
+                    Здесь вы можете просматривать свои книги, историю взаимодействий и использовать другие функции читательского кабинета.
+                </p>
+
+                <!-- Кнопка выхода -->
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('logout_reader') }}" class="btn btn-danger btn-lg rounded-pill shadow-sm">
+                        🔐 Выйти из аккаунта
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

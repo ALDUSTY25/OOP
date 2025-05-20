@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center fade-in">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-4">
+                <h2 class="text-center mb-4">📝 Редактировать жанр: {{ genre.name }}</h2>
+
+                <!-- Форма редактирования жанра -->
+                <form method="POST" class="needs-validation" novalidate>
+                    {{ form.hidden_tag() }}
+
+                    <!-- Название жанра -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label visually-hidden">{{ form.name.label }}</label>
+                        {{ form.name(class="form-control form-control-lg rounded-pill", id="name", placeholder=form.name.label.text, required=True) }}
+                        <div class="invalid-feedback">
+                            Введите название жанра
+                        </div>
+                    </div>
+
+                    <!-- Кнопка сохранения -->
+                    <div class="d-grid">
+                        {{ form.submit(class="btn btn-primary btn-lg rounded-pill shadow-sm", value='Сохранить') }}
+                    </div>
+                </form>
+
+                <!-- Ссылка назад -->
+                <p class="text-center mt-3">
+                    <a href="{{ url_for('genres') }}" class="text-decoration-none">← Назад к жанрам</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
